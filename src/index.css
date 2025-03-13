@@ -145,10 +145,46 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
+/* debería ser pr-2 pero bueno, no voy a tocar tailwind */
+.contain-strict {
+  padding-right: 8px;
+}
+
+section:has(.zoom) {
+  /* para menos de 375px */
+  scale: 0.55;
+  transition: scale 0.3s ease-in-out;
+
+  @media (width >= 375px) {
+    scale: 0.65;
+  }
+
+  @media (width >= 425px) {
+    scale: 0.73;
+  }
+
+  @media (width >= 768px) {
+    scale: 1;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
 
 ::-webkit-scrollbar-thumb {
   background: black;
   border-radius: 4px;
+}
+
+.zoom {
+  transform: scale(var(--zoom));
+}
+
+.icon {
+  & :is(path, rect, circle, ellipse, line, polygon, polyline) {
+    stroke: currentColor;
+  }
 }
 
 @layer base {

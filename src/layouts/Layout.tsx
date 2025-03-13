@@ -1,7 +1,7 @@
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { Header } from "../components/header/Header";
-import { LeftSidebar } from "@/components/left-panel/LeftSidebar";
-import { RightSidebar } from "@/components/right-panel/RightSidebar";
+import Header from '@/components/header/Header';
+import { LeftSidebar } from '@/components/left-panel/LeftSidebar';
+import { RightSidebar } from '@/components/right-panel/RightSidebar';
+import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -25,5 +25,5 @@ export default function Layout({ children }: LayoutProps) {
         </SidebarProvider>
       </main>
     </div>
-  )
+  );
 }

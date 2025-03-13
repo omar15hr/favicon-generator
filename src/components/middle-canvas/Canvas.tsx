@@ -1,6 +1,6 @@
-import Icon from '../icon.tsx';
+import Icon from '../icon';
 import noiseImg from '@/assets/noise.svg';
-import { useIconContext } from '@/context/useIconContext.tsx';
+import { useIconContext } from '@/context/useIconContext';
 
 const CANVAS_SIZE = 512;
 

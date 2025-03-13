@@ -25,8 +25,8 @@ export const CanvasLayout = ({ children }: { children: React.ReactNode }) => {
     <section className="flex flex-col items-center justify-center h-full">
       <article
         style={{
-          transform: `scale(${zoom})`,
-        }}
+          '--zoom': zoom,
+        } as React.CSSProperties}
         className="flex items-center justify-center p-8 w-fit h-fit aspect-square bg-neutral-900 zoom duration-300"
       >
         {children}

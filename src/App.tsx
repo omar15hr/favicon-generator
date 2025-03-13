@@ -30,7 +30,7 @@ export interface IconProps extends SVGProps<SVGSVGElement> {
 function App() {
   return (
     <IconProvider>
-      <Toaster />
+      <Toaster theme="dark" />
       <Layout>
         <CanvasLayout>
           <Canvas />
