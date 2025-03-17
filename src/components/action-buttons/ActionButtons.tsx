@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Button } from "../ui/button";
 
-const Header = () => {
+const ActionButtons = () => {
   const headerRef = useRef<HTMLHeadElement>(null);
 
   useEffect(() => {
@@ -21,14 +21,14 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default ActionButtons;
 
 export const DownloadButtons = () => {
   return (
     <div className="flex items-center justify-end gap-2">
-      <Button variant="outline">Save Favicon</Button>
-      <Button variant="outline">Download SVG</Button>
-      <Button variant="outline">Download PNG</Button>
+      <Button variant="outline" className="cursor-pointer">Save Favicon</Button>
+      <Button variant="outline" className="cursor-pointer">Download SVG</Button>
+      <Button variant="outline" className="cursor-pointer">Download PNG</Button>
     </div>
   );
 };
