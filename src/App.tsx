@@ -1,13 +1,11 @@
-import { LeftSidebar } from "./components/left-sidebar/LeftSidebar"
-
+import { Layout } from "./layouts/Layout";
 
 function App() {
-
   return (
     <>
-      <LeftSidebar />
+      <Layout />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
