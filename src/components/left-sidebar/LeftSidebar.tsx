@@ -1,71 +1,74 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import { ChevronDown, ChevronUp, Shuffle } from "lucide-react";
 
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
-const items = [
-  {
-    title: "Home",
-    url: "#",
-    icon: Home,
-  },
-  {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
-  },
-  {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
-  },
-];
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { useState } from "react";
 
 export function LeftSidebar() {
+  const [isAllIconsOpen, setIsAllIconsOpen] = useState(true);
+  const [isMyIconsOpen, setIsMyIconsOpen] = useState(false);
+
   return (
     <SidebarProvider>
-      <Sidebar>
+      <Sidebar side="left" variant="floating">
         <SidebarContent>
           <SidebarGroup>
-            <SidebarGroupLabel>Application</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
-                      <a href={item.url}>
-                        <item.icon />
-                        <span>{item.title}</span>
-                      </a>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
+                <div className="flex items-center gap-2">
+                  <Input placeholder="Search icons" />
+                  <Button
+                    variant={"outline"}
+                    className="cursor-pointer border bg-primary"
+                  >
+                    <Shuffle />
+                  </Button>
+                </div>
+                <Collapsible onOpenChange={setIsMyIconsOpen}>
+                  <CollapsibleTrigger className="w-full">
+                    <Button variant={"secondary"} className="w-full">
+                      <span>My Icons</span>
+                      {isMyIconsOpen ? <ChevronUp /> : <ChevronDown />}
+                    </Button>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    Yes. Free to use for personal and commercial projects. No
+                    attribution required.
+                  </CollapsibleContent>
+                </Collapsible>
+                <Collapsible onOpenChange={setIsAllIconsOpen}>
+                  <CollapsibleTrigger className="w-full">
+                    <Button variant={"outline"} className="w-full">
+                      <span>All Icons</span>
+                      {isAllIconsOpen ? <ChevronUp /> : <ChevronDown />}
+                    </Button>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    Yes. Free to use for personal and commercial projects. No
+                    attribution required.
+                  </CollapsibleContent>
+                </Collapsible>
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
       </Sidebar>
-      <SidebarTrigger />
+      <SidebarTrigger className="mt-1 text-white" />
     </SidebarProvider>
   );
 }
