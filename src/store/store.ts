@@ -17,7 +17,7 @@ type IconStore = {
   setImportedIcons: (icons: Icons) => void;
 }
 
-const DEFAULT_ICON: IconProps = {
+export const DEFAULT_ICON: IconProps = {
 	id: crypto.randomUUID(),
 	primaryBgColor: "#7692bc",
 	secondaryBgColor: "#0c1118",
@@ -36,9 +36,9 @@ const DEFAULT_ICON: IconProps = {
 	yOffset: 0,
 };
 
-export const iconStore = create<IconStore>((set) => ({
+export const useIconStore = create<IconStore>((set) => ({
   icon: DEFAULT_ICON,
-  setIcon: (icon) => set({ icon }),
+  setIcon: (icon) => set({ icon: icon }),
   undo: () => { },
   redo: () => { },
   canUndo: false,
@@ -47,6 +47,6 @@ export const iconStore = create<IconStore>((set) => ({
   setSVGElement: (svg) => set({ svgElement: svg }),
   lastIcons: [],
   setLastIcons: (icons) => set({ lastIcons: icons }),
-  importedIcons: ({} as Icons),
+  importedIcons: {} as Icons,
   setImportedIcons: (icons) => set({ importedIcons: icons }),
 }))

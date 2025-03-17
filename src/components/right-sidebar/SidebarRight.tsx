@@ -7,7 +7,6 @@ import {
   SidebarGroupContent,
 } from "@/components/ui/sidebar";
 
-import { Button } from "../ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import {
   Collapsible,
@@ -37,10 +36,10 @@ export function SidebarRight({
             <SidebarMenu>
               <Collapsible onOpenChange={setIsMyIconsOpen}>
                 <CollapsibleTrigger className="w-full">
-                  <Button variant={"secondary"} className="w-full">
+                  <div className="w-full bg-[#242427] flex gap-2 items-center p-2 rounded-md justify-center">
                     <span>Background Props</span>
                     {isMyIconsOpen ? <ChevronUp /> : <ChevronDown />}
-                  </Button>
+                  </div>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   <BackgroundProps />
@@ -48,10 +47,10 @@ export function SidebarRight({
               </Collapsible>
               <Collapsible onOpenChange={setIsAllIconsOpen}>
                 <CollapsibleTrigger className="w-full">
-                  <Button variant={"outline"} className="w-full">
+                  <div className="w-full bg-[#242427] flex gap-2 items-center p-2 rounded-md justify-center">
                     <span>Icon Props</span>
                     {isAllIconsOpen ? <ChevronUp /> : <ChevronDown />}
-                  </Button>
+                  </div>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                  <IconsProps />
@@ -59,10 +58,10 @@ export function SidebarRight({
               </Collapsible>
               <Collapsible onOpenChange={setIsAllIconsOpen}>
                 <CollapsibleTrigger className="w-full">
-                  <Button variant={"outline"} className="w-full">
+                  <div className="w-full bg-[#242427] flex gap-2 items-center p-2 rounded-md justify-center">
                     <span>Help</span>
                     {isAllIconsOpen ? <ChevronUp /> : <ChevronDown />}
-                  </Button>
+                  </div>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   <Help />

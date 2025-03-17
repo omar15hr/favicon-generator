@@ -7,8 +7,13 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { useIconStore } from "@/store/store";
 
 export function Layout() {
+  const icon = useIconStore((state) => state.icon);
+
+  console.log(icon);
+
   return (
     <SidebarProvider>
       <SidebarLeft />
@@ -23,7 +28,8 @@ export function Layout() {
           <ActionButtons />
         </div>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          <div className="mx-auto h-full w-full max-w-3xl rounded-xl bg-muted/50" />
+          <div className="mx-auto h-full w-full max-w-3xl rounded-xl bg-muted/50">
+          </div>
         </div>
       </SidebarInset>
       <SidebarRight />

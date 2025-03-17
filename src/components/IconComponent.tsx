@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 import { icons } from 'lucide-react';
 import { IconName } from '@/lib/icons';
-import { iconStore } from '@/store/store';
+import { useIconStore } from '@/store/store';
 
 const Icon = ({
   name,
@@ -9,7 +9,7 @@ const Icon = ({
 }: {
   name: IconName;
 } & ComponentProps<'svg'>) => {
-  const importedIcons = iconStore(state => state.importedIcons);
+  const importedIcons = useIconStore(state => state.importedIcons);
 
   const allIcons = { ...icons, ...importedIcons } as const;
 

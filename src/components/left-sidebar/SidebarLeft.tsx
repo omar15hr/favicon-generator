@@ -1,5 +1,4 @@
 "use client";
-import * as React from "react";
 
 import {
   Sidebar,
@@ -8,7 +7,6 @@ import {
   SidebarGroupContent,
   SidebarMenu,
   SidebarRail,
-  useSidebar,
 } from "@/components/ui/sidebar";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -18,44 +16,18 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@radix-ui/react-collapsible";
-import { useState, useMemo, useRef, Fragment } from "react";
-import { generateIconsGrid, isLucideIcon } from "@/lib/icons";
-import { iconStore } from "@/store/store";
-import { useVirtualizer } from '@tanstack/react-virtual';
+import { useState } from "react";
+import IconList from "./IconList";
+import { useIconStore } from "@/store/store";
 
-const ITEMS_PER_ROW = 4;
 
 export function SidebarLeft({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
-  const [isAllIconsOpen, setIsAllIconsOpen] = useState(true);
+  const [isAllIconsOpen, setIsAllIconsOpen] = useState(false);
   const [isMyIconsOpen, setIsMyIconsOpen] = useState(false);
-
-  const icons = iconStore(state => state.icon);
-  const setIcon = iconStore(state => state.setIcon);
-
-  const parentRef = useRef<HTMLDivElement>(null);
-  const [iconSearch, setIconSearch] = useState('');
-  const filteredIcons = Object.entries(icons).filter(([key]) => key.toLowerCase().includes(iconSearch.toLowerCase()));
-  const { open } = useSidebar();
-
-  console.log(icons);
-  
-  const rows = useMemo( () => generateIconsGrid({
-    columns: ITEMS_PER_ROW,
-    items: filteredIcons
-  }),
-  [filteredIcons]);
-
-  const rowVirtualizer = useVirtualizer({
-    count: rows.length,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 85,
-    enabled: open && isAllIconsOpen,
-    overscan: 5,
-  });
-
-  const items = rowVirtualizer.getVirtualItems();
+  const [iconSearch] = useState("");
+  const setIcon = useIconStore((state) => state.setIcon);
 
   return (
     <Sidebar className="border-r-0" {...props}>
@@ -64,7 +36,9 @@ export function SidebarLeft({
           <SidebarGroupContent>
             <SidebarMenu>
               <div className="flex items-center gap-2">
-                <Input placeholder="Search icons" />
+                <Input
+                  placeholder="Search icons"
+                />
                 <Button
                   variant={"outline"}
                   className="cursor-pointer border bg-primary"
@@ -74,10 +48,10 @@ export function SidebarLeft({
               </div>
               <Collapsible onOpenChange={setIsMyIconsOpen}>
                 <CollapsibleTrigger className="w-full">
-                  <Button variant={"secondary"} className="w-full">
+                  <div className="w-full bg-[#242427] flex gap-2 items-center p-2 rounded-md justify-center">
                     <span>My Icons</span>
                     {isMyIconsOpen ? <ChevronUp /> : <ChevronDown />}
-                  </Button>
+                  </div>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   Yes. Free to use for personal and commercial projects. No
@@ -86,38 +60,15 @@ export function SidebarLeft({
               </Collapsible>
               <Collapsible onOpenChange={setIsAllIconsOpen}>
                 <CollapsibleTrigger className="w-full">
-                  <Button variant={"outline"} className="w-full">
+                  <div className="w-full bg-[#242427] flex gap-2 items-center p-2 rounded-md justify-center">
                     <span>All Icons</span>
                     {isAllIconsOpen ? <ChevronUp /> : <ChevronDown />}
-                  </Button>
+                  </div>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
-                {items.map((row) => (
-                    <div
-                      key={row.key}
-                      ref={rowVirtualizer.measureElement}
-                      className="grid grid-cols-[repeat(4,1fr)] gap-2"
-                    >
-                      {rows[row.index].map(([iconName, IconComponent]) => {
-                        if (!IconComponent) return null;
-
-                        return (
-                          <Fragment key={iconName}>
-                            <Button
-                              variant="outline"
-                              onClick={() => {
-                                if (!isLucideIcon(iconName)) return;
-                                setIcon({ ...icons, iconName });
-                              }}
-                              className="rounded-md [&_svg]:size-6 aspect-square w-full h-auto"
-                            >
-                              <IconComponent />
-                            </Button>
-                          </Fragment>
-                        );
-                      })}
-                    </div>
-                  ))}
+                  <div className="text-center p-2">
+                  <IconList iconSearch={iconSearch} setIcon={setIcon} />
+                  </div>
                 </CollapsibleContent>
               </Collapsible>
             </SidebarMenu>
