@@ -15,6 +15,9 @@ import {
   CollapsibleTrigger,
 } from "@radix-ui/react-collapsible";
 import { useState } from "react";
+import { BackgroundProps } from "./BackgroundProps";
+import { IconsProps } from "./IconsProps";
+import { Help } from "./Help";
 
 export function SidebarRight({
   ...props
@@ -40,8 +43,7 @@ export function SidebarRight({
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
-                  Yes. Free to use for personal and commercial projects. No
-                  attribution required.
+                  <BackgroundProps />
                 </CollapsibleContent>
               </Collapsible>
               <Collapsible onOpenChange={setIsAllIconsOpen}>
@@ -52,8 +54,7 @@ export function SidebarRight({
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
-                  Yes. Free to use for personal and commercial projects. No
-                  attribution required.
+                 <IconsProps />
                 </CollapsibleContent>
               </Collapsible>
               <Collapsible onOpenChange={setIsAllIconsOpen}>
@@ -64,8 +65,7 @@ export function SidebarRight({
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
-                  Yes. Free to use for personal and commercial projects. No
-                  attribution required.
+                  <Help />
                 </CollapsibleContent>
               </Collapsible>
             </SidebarMenu>
